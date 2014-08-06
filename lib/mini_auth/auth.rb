@@ -8,7 +8,7 @@ module MiniAuth
     end
 
     def current_user
-      @current_user ||= login_from_token || login_from_cookie
+      @current_user ||= login_from_token || login_from_cookie || login_from_custom_strategy
     end
 
     def current_user=(new_user)
@@ -21,6 +21,10 @@ module MiniAuth
 
     def login_from_cookie
       self.current_user = MiniAuth.configuration.cookie_strategy.call(cookies)
+    end
+
+    def login_from_custom_strategy
+      self.current_user = MiniAuth.configuration.custom_strategy.call({controller: self, cookies: cookies, request: request})
     end
 
     def logged_in?

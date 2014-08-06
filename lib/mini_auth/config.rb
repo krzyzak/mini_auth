@@ -1,6 +1,6 @@
 module MiniAuth
   class Config
-    attr_writer :token_strategy, :cookie_strategy, :null_user
+    attr_writer :token_strategy, :cookie_strategy, :custom_strategy, :null_user
 
     def token_strategy
       @token_strategy || proc{ nil }
@@ -8,6 +8,10 @@ module MiniAuth
 
     def cookie_strategy
       @cookie_strategy || proc{ nil }
+    end
+
+    def custom_strategy
+      @vustom_strategy || proc{ nil }
     end
 
     def null_user
