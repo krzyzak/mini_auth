@@ -20,7 +20,7 @@ module MiniAuth
     end
 
     def login_from_cookie
-      self.current_user = MiniAuth.configuration.cookie_strategy.call
+      self.current_user = MiniAuth.configuration.cookie_strategy.call(cookies)
     end
 
     def logged_in?
